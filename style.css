@@ -1,0 +1,376 @@
+/* Pengaturan dasar dan font */
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fce4ec, #f3e5f5); /* Gradasi warna pastel pink ke ungu */
+    color: #5d4037; /* Warna teks gelap lembut */
+    overflow-x: hidden;
+}
+
+/* Kontainer utama */
+.container {
+    max-width: 700px;
+    width: 100%;
+    text-align: center;
+}
+
+/* ===== TAMPILAN PEMBUKA (COVER) ===== */
+#cover {
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+#cover h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    color: #c2185b; /* Warna pink tua */
+    margin-bottom: 10px;
+}
+
+#cover p {
+    font-size: 1.2em;
+    font-style: italic;
+    color: #795548;
+}
+
+#open-letter-btn {
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    font-size: 1em;
+    color: white;
+    background-color: #ec407a; /* Warna tombol pink cerah */
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+#open-letter-btn:hover {
+    background-color: #d81b60; /* Warna saat disentuh */
+    transform: scale(1.05);
+}
+
+/* ===== TAMPILAN SURAT ===== */
+#letter {
+    background-color: rgba(255, 255, 255, 0.85); /* Latar belakang surat semi-transparan */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: left;
+    line-height: 1.8;
+}
+
+#letter h2 {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 2.2em;
+    color: #c2185b;
+    margin-top: 0;
+}
+
+.signature {
+    margin-top: 40px;
+    text-align: right;
+    font-style: italic;
+}
+
+.signature .name {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5em;
+    margin-top: 5px;
+}
+
+/* ===== ANIMASI ===== */
+
+/* Kelas untuk menyembunyikan elemen */
+.hidden {
+    display: none;
+}
+
+/* Efek memudar saat cover menghilang */
+.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+/* Efek muncul untuk setiap paragraf saat di-scroll */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animasi hati di bagian akhir */
+.heart-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.heart {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-color: #ec407a;
+    position: relative;
+    transform: rotate(-45deg);
+    animation: beat 1.5s infinite;
+}
+
+.heart::before,
+.heart::after {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background-color: #ec407a;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.heart::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart::after {
+    top: 0;
+    left: 25px;
+}
+
+@keyframes beat {
+    0%, 100% {
+        transform: scale(1) rotate(-45deg);
+    }
+    50% {
+        transform: scale(1.1) rotate(-45deg);
+    }
+}
+
+/* Penyesuaian untuk layar kecil (HP) */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+    #cover h1 {
+        font-size: 2em;
+    }
+    #letter {
+        padding: 20px;
+    }
+}
+
+/* ... (Salin semua kode CSS yang sudah ada sebelumnya) ... */
+
+/* ===== BAGIAN HATI (TRIGGER MODAL) ===== */
+#heart-trigger {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+#heart-trigger:hover {
+    transform: scale(1.1);
+}
+
+/* ====================================================== */
+/* BAGIAN BARU: STYLE UNTUK MODAL POP-UP */
+/* ====================================================== */
+
+/* Lapisan latar belakang gelap */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.overlay-flex{
+    display: flex;
+}
+
+/* Kotak konten modal */
+.modal-content {
+    background-color: #fffafa; /* Warna putih gading */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 600px; /* Lebar maksimal modal */
+    text-align: center;
+    font-family: 'Lora', serif;
+}
+
+.modal-content h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2em;
+    color: #c2185b;
+    margin-top: 0;
+}
+
+/* Galeri Foto */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover; /* Agar gambar pas dan tidak gepeng */
+    border-radius: 8px;
+    border: 2px solid #fce4ec;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Penyesuaian galeri untuk HP (layar kecil) */
+@media (max-width: 600px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di HP */
+    }
+    .gallery-grid img {
+        height: 100px;
+    }
+}
+
+/* Tombol di dalam Modal */
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Tombol Maafin (Baik) */
+#btn-maafin {
+    color: white;
+    background-color: #4CAF50; /* Hijau */
+}
+#btn-maafin:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Tombol Gak Maafin (Nakal) */
+#btn-gak-maafin {
+    color: white;
+    background-color: #f44336; /* Merah */
+    /* Transisi untuk perpindahan yang mulus */
+    transition: transform 0.2s ease-out;
+}
+#btn-gak-maafin:hover {
+    box-shadow: 0 4px 15px rgba(244, 67, 54, 0.4);
+}
+
+/* Pesan Terima Kasih */
+#thank-you-message h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5em;
+    color: #ec407a;
+}
+
+#thank-you-message p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    color: #5d4037;
+}
+
+/* Tombol tutup di pesan terima kasih */
+#btn-tutup-modal {
+    font-family: 'Lora', serif;
+    font-weight: bold;
+    padding: 12px 25px;
+    font-size: 1em;
+    color: white;
+    background-color: #ec407a;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#btn-tutup-modal:hover {
+    background-color: #d81b60;
+    transform: scale(1.05);
+}
+
+/* BAGIAN BARU: EFEK HOVER PADA GALERI KENANGAN */
+/* ====================================================== */
+
+/* Wadah untuk setiap gambar dan caption-nya */
+.gallery-item {
+    position: relative; /* Wajib agar caption bisa diposisikan di dalamnya */
+    border-radius: 8px; /* Samakan dengan radius gambar */
+    overflow: hidden; /* Sembunyikan bagian caption yang keluar */
+    cursor: pointer;
+}
+
+/* Teks caption di dalam gambar */
+.caption {
+    position: absolute; /* Posisikan di atas gambar */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); /* Gradasi gelap */
+    color: white;
+    padding: 20px 10px 10px 10px; /* Padding (atas, kanan, bawah, kiri) */
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: center;
+
+    /* Sembunyikan caption secara default */
+    opacity: 0;
+    transform: translateY(100%); /* Geser ke bawah */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Animasi halus */
+}
+
+/* Efek saat WADAH GAMBAR di-hover */
+.gallery-item:hover .caption {
+    /* Tampilkan kembali caption-nya */
+    opacity: 1;
+    transform: translateY(0); /* Kembalikan ke posisi semula */
+}
+
+/* Efek zoom kecil pada GAMBAR saat di-hover (opsional, tapi keren) */
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Tambahkan transisi pada gambar agar zoom-nya mulus */
+.gallery-grid img {
+    transition: transform 0.3s ease; /* Baris ini ditambahkan/dimodifikasi */
+}
